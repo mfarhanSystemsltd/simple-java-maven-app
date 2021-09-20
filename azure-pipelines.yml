@@ -24,7 +24,7 @@ steps:
 
 - task: CmdLine@2
   inputs:
-    script: 'ls'
+    script: 'cd target && ls'
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit'
