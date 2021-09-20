@@ -28,7 +28,7 @@ steps:
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit'
-    testResultsFiles: '(System.DefaultWorkingDirectory)/target/*.xml'
+    testResultsFiles: '(System.DefaultWorkingDirectory)/target/surefire-reports/*.xml'
 # - task: Maven@3
 #   inputs:
 #     mavenPomFile: 'pom.xml'
