@@ -36,6 +36,10 @@ steps:
 #     effectivePomSkip: false
 #     sonarQubeRunAnalysis: false
 #     goals: 'package'
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/src/test/java/com/mycompany/app/AppTest.java*'
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
   inputs:
