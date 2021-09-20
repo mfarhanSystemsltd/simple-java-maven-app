@@ -10,18 +10,23 @@ pool:
   vmImage: ubuntu-latest
  
 steps:
+- task: CmdLine@2
+  inputs:
+    script: 'ls'
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
     publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    testResultsFiles: '**/TEST-*.xml'
     codeCoverageToolOption: 'Cobertura'
     javaHomeOption: 'JDKVersion'
     mavenVersionOption: 'Default'
     mavenAuthenticateFeed: false
     effectivePomSkip: false
     sonarQubeRunAnalysis: false
-
+- task: CmdLine@2
+  inputs:
+    script: 'ls'
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit'
