@@ -10,15 +10,22 @@ pool:
   vmImage: ubuntu-latest
  
 steps:
- 
 - task: Maven@3
-  displayName: 'Maven pom.xml'
   inputs:
-    mavenPomFile: pom.xml
-    testResultsFiles: src/test/java/com/mycompany/app/AppTest.java
-    codeCoverageToolOption: JaCoCo
-    codeCoverageClassFilesDirectories: src/test/java/com/mycompany/app/AppTest.java
-    codeCoverageSourceDirectories: src/
+    mavenPomFile: 'pom.xml'
+    publishJUnitResults: true
+    testResultsFiles: '$(System.DefaultWorkingDirectory)/src/test/java/com/mycompany/app/*.xml'
+    codeCoverageToolOption: 'Cobertura'
+    javaHomeOption: 'JDKVersion'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '/src/test/java/com/mycompany/app/*.xml'
 # - task: Maven@3
 #   inputs:
 #     mavenPomFile: 'pom.xml'
@@ -36,16 +43,17 @@ steps:
 #     effectivePomSkip: false
 #     sonarQubeRunAnalysis: false
 #     goals: 'package'
-- task: CopyFiles@2
-  displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
-  inputs:
-    SourceFolder: '$(system.defaultworkingdirectory)'
-    Contents: '**/*.jar'
-    TargetFolder: '$(build.artifactstagingdirectory)'
-  condition: succeededOrFailed()
+
+#   - task: CopyFiles@2
+#   displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
+#   inputs:
+#     SourceFolder: '$(system.defaultworkingdirectory)'
+#     Contents: '**/*.jar'
+#     TargetFolder: '$(build.artifactstagingdirectory)'
+#   condition: succeededOrFailed()
  
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: drop'
-  inputs:
-    PathtoPublish: '$(build.artifactstagingdirectory)'
-  condition: succeededOrFailed()
+# - task: PublishBuildArtifacts@1
+#   displayName: 'Publish Artifact: drop'
+#   inputs:
+#     PathtoPublish: '$(build.artifactstagingdirectory)'
+#   condition: succeededOrFailed()
