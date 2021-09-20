@@ -14,7 +14,7 @@ steps:
   inputs:
     mavenPomFile: 'pom.xml'
     publishJUnitResults: true
-    testResultsFiles: '$(System.DefaultWorkingDirectory)/src/test/java/com/mycompany/app/*.xml'
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
     codeCoverageToolOption: 'Cobertura'
     javaHomeOption: 'JDKVersion'
     mavenVersionOption: 'Default'
@@ -25,7 +25,7 @@ steps:
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit'
-    testResultsFiles: '/src/test/java/com/mycompany/app/*.xml'
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
 # - task: Maven@3
 #   inputs:
 #     mavenPomFile: 'pom.xml'
