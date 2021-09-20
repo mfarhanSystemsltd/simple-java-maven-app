@@ -24,7 +24,7 @@ steps:
 
 - task: CmdLine@2
   inputs:
-    script: 'cd target && ls'
+    script: 'cd target/surefire-reports && ls'
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit'
