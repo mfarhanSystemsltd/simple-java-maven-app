@@ -21,9 +21,7 @@ steps:
     codeCoverageToolOption: 'Cobertura'
     javaHomeOption: 'JDKVersion'
     mavenVersionOption: 'Default'
-    mavenAuthenticateFeed: false
-    effectivePomSkip: false
-    sonarQubeRunAnalysis: false
+
 - task: CmdLine@2
   inputs:
     script: 'ls'
